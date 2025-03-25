@@ -12,7 +12,7 @@ class TTS:
 
     # Function to speak text
     def speak(self, text):
-        tts = gTTS(text=text, lang='en', slow=False, tld="ru")
+        tts = gTTS(text=text, lang='en', slow=False, tld='ru')
         tts.save("voice.mp3")
         AudioPlayer("voice.mp3").play(block=True)
 
