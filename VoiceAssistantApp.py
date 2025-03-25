@@ -1,15 +1,16 @@
 import speech_recognition as sr
-import pyttsx3
+from gtts import gTTS
 from openai import OpenAI
 import requests
+from audioplayer import AudioPlayer
 from datetime import datetime
 
-
+"""
 # Setting up the Text-To-Speech engine
-engine = pyttsx3.init()
+engine = pyttsx4.init("coqui_ai_tts")
 engine.setProperty('rate', 200)  # Speed of speech
 engine.setProperty('voice', 'english')  # Language
-
+"""
 # OpenAI API Key (set your API key here)
 OPENAI_API_KEY = "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"
 
@@ -22,8 +23,25 @@ news_api_key = "8f0d56d54b4640339d5884c7ebabc166"
 
 # Function to speak text
 def speak(text):
+    """# Get all voices available in your system
+    voices = engine.getProperty('voices')
+
+    print("Available voices:")
+    for index, voice in enumerate(voices):
+        print(f"Voice {index}:")
+        print(f"  - ID: {voice.id}")
+        print(f"  - Name: {voice.name}")
+        print(f"  - Languages: {voice.languages}")
+        print(f"  - Gender: {voice.gender}")
+        print(f"  - Age: {voice.age}")
+
+
     engine.say(text)
-    engine.runAndWait()
+    engine.runAndWait()"""
+    tts = gTTS(text=text, lang='en', slow=False, tld="ru")
+    tts.save("voice.mp3")
+    AudioPlayer("voice.mp3").play(block=True)
+
 
 # Function to recognize speech
 def recognize_speech():
