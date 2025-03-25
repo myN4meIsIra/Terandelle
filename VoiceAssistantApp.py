@@ -25,7 +25,6 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
 
-
 # Function to recognize speech
 def recognize_speech():
     try:
