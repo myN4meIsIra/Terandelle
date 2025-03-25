@@ -1,6 +1,6 @@
-#
+# main
 """
-
+main script
 """
 
 def main():
