@@ -4,8 +4,11 @@ pull newsfeed data
 """
 import requests
 
-# News API Key (NewsAPI)
-news_api_key = "8f0d56d54b4640339d5884c7ebabc166"
+from apiKeys import *
+from logHandler import Logger
+
+log = Logger(True, "news")
+
 
 
 class News:

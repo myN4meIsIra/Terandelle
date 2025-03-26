@@ -2,6 +2,9 @@
 """
 to do list and calendar stuffs
 """
+from logHandler import Logger
+
+log = Logger(True, "todo")
 
 class Todo:
     def __init__(self):

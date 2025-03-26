@@ -3,10 +3,11 @@
 run weather data retrieving scripts
 """
 import requests
+from apiKeys import *
 
+from logHandler import Logger
 
-# Weather API Key (OpenWeatherMap)
-weather_api_key = "75f6c15e22433ed3e7406b24691a0706"
+log = Logger(True, "weather")
 
 
 class Weather:

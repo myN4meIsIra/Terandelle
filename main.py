@@ -9,7 +9,9 @@ from weather import Weather
 from todo import Todo
 from gptChat import GPTChat
 from news import News
+from logHandler import Logger
 
+log = Logger(True, "main")
 import sys
 
 # Main function to handle voice input and interaction
@@ -72,3 +74,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    log.log("done\n\n")
