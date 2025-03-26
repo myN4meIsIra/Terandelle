@@ -10,13 +10,14 @@ from todo import Todo
 from gptChat import GPTChat
 from news import News
 
+import sys
 
 # Main function to handle voice input and interaction
 def main():
     tts = TTS()
     gptChat = GPTChat()
 
-    tts.speak(gptChat.chat_with_gpt("Hello Terrandelle!"))
+    tts.speak(gptChat.chat_with_gpt("Hello Terandelle!"))
 
     speechRecog = SpeechRecog()
     while True:
@@ -26,14 +27,16 @@ def main():
 
         query = query.lower()
 
+
         # Exit the assistant
         if "exit" in query or "quit" in query or "stop" in query:
-            tts.speak("Goodbye! Have a great day!")
+            tts.speak(gptChat.chat_with_gpt("Goodbye!"))
+            sys.exit()
             break
 
         # Interactive conversation
         elif "chat" in query or "talk" in query:
-            tts.speak("What would you like to talk about?")
+            tts.speak(gptChat.chat_with_gpt(query))
             user_input = speechRecog.recognize_speech()
             if user_input:
                 response = gptChat.chat_with_gpt(user_input)
@@ -60,14 +63,11 @@ def main():
             response = todo.manage_calendar_and_todo(query)
             tts.speak(response)
 
-            # Exit the assistant
-        elif "exit" in query or "quit" in query or "stop" in query:
-            tts.speak("Goodbye! Have a great day!")
-            break
+
 
         # Fallback for unclear commands
         else:
-            tts.speak("I'm sorry, I didn't understand that. Can you please repeat?")
+            tts.speak(gptChat.chat_with_gpt("You didn't quite understand the last thing I said, could you ask me to repeat it?"))
 
 
 if __name__ == "__main__":
