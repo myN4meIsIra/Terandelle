@@ -4,7 +4,7 @@ pull data from wikipedia
 """
 import wikipedia
 
-class Wikipedia:
+class WikipediaClass:
 
     def __init__(self):
         pass

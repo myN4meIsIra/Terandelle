@@ -12,7 +12,7 @@ log = Logger(True, "gptChat")
 
 class GPTChat:
     def __init__(self):
-            self.terandellePersonality = "You are a kind, sweet, thoughtful friend. You prefer shorter responses. I am a girl named Eera. Your name is Terandelle."
+            self.terandellePersonality = "You are a kind, sweet, thoughtful friend. You prefer shorter responses. I am a girl named Eera, though please don't over use it. Your name is Terandelle."
             #self.terandellePersonality = "You are a kind, sweet friend, who is incredibly knowledgeable. Your name is Terandelle."
 
     # Function to interact with ChatGPT using gpt-3.5-turbo

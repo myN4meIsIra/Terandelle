@@ -10,7 +10,7 @@ from todo import Todo
 from gptChat import GPTChat
 from news import News
 from logHandler import Logger
-from wikipedia import Wikipedia
+from wikipediaHandler import WikipediaClass
 
 import datetime
 
@@ -35,12 +35,12 @@ def main():
 
         # Exit the assistant
         if "exit" in query or "quit" in query or "stop" in query:
-            tts.speak(gptChat.chat_with_gpt("Goodbye!"))
+            tts.speak(gptChat.chat_with_gpt("Goodbye Terandelle!"))
             break
 
         # Weather information
         elif "weather" in query:
-            tts.speak("Which city's weather would you like to know?")
+            tts.speak(gptChat.chat_with_gpt("Could you please ask me which city i would like to know the weather for?"))
             city = speechRecog.recognize_speech()
             if city:
                 weather = Weather()
@@ -54,16 +54,16 @@ def main():
             tts.speak(theNews)
 
         elif "wikipedia" in query:
-            wikipedia = Wikipedia()
-            tts.speak(gptChat.chat_with_gpt("Ask me what I would like to know about."))
+            wikipedia = WikipediaClass()
+            tts.speak(gptChat.chat_with_gpt("Ask me what I would like to know about from Wikipedia."))
             request_topic = speechRecog.recognize_speech()
             wiki = wikipedia.wikipediaDefine(request_topic)
-            defineTextList = wiki.split("."
-                                        "")
-            # loop through input:lines, or fewer lines in the return if there are fewer than input:lines lines in it
-            for i in range(0, min(len(defineTextList) + 1, 6)):
-                print("line: " + str(i))
-                tts.speak(defineTextList[i])
+            if wiki is not None:
+                defineTextList = wiki.split(".")
+                # loop through input:lines, or fewer lines in the return if there are fewer than input:lines lines in it
+                for i in range(0, min(len(defineTextList) + 1, 4)):
+                    print("line: " + str(i))
+                    tts.speak(defineTextList[i])
 
         elif "time" in query:
             tts.speak(gptChat.chat_with_gpt(f"Could you please tell me that the time is {str(datetime.datetime.now().strftime("%H:%M"))}, though say it differently?"))
@@ -76,6 +76,14 @@ def main():
 
         elif "thank you" in query or "thanks" in query:
             tts.speak(gptChat.chat_with_gpt(query))
+
+        elif "what can you do" in query:
+            tts.speak(gptChat.chat_with_gpt("please explain to me that you can pull weather information, "
+                                            "the news, "
+                                            "wikipedia articles, "
+                                            "tell the time, "
+                                            "manage me to-do list, "
+                                            "and chat using chat gpt, briefly explaining that you can."))
 
         # Interactive conversation
         elif "chat" in query or "talk" in query:
