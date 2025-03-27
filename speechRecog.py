@@ -2,6 +2,7 @@
 """
 speech recognition implementations
 """
+import vlc
 import speech_recognition as sr
 from tts import TTS
 from gptChat import GPTChat
@@ -15,6 +16,11 @@ class SpeechRecog:
 
     # Function to recognize speech
     def recognize_speech(self):
+
+        startTone = "sounds/sounds_startOfRecording.mp3"
+        player = vlc.MediaPlayer(startTone)
+        player.play()
+
         tts = TTS()
         log.log("recognizing speech")
         try:

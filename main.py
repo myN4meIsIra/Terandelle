@@ -10,6 +10,9 @@ from todo import Todo
 from gptChat import GPTChat
 from news import News
 from logHandler import Logger
+from wikipedia import Wikipedia
+
+import datetime
 
 log = Logger(True, "main")
 import sys
@@ -33,16 +36,7 @@ def main():
         # Exit the assistant
         if "exit" in query or "quit" in query or "stop" in query:
             tts.speak(gptChat.chat_with_gpt("Goodbye!"))
-            sys.exit()
             break
-
-        # Interactive conversation
-        elif "chat" in query or "talk" in query:
-            tts.speak(gptChat.chat_with_gpt(query))
-            user_input = speechRecog.recognize_speech()
-            if user_input:
-                response = gptChat.chat_with_gpt(user_input)
-                tts.speak(response)
 
         # Weather information
         elif "weather" in query:
@@ -59,17 +53,47 @@ def main():
             theNews = news.get_news()
             tts.speak(theNews)
 
+        elif "wikipedia" in query:
+            wikipedia = Wikipedia()
+            tts.speak(gptChat.chat_with_gpt("Ask me what I would like to know about."))
+            request_topic = speechRecog.recognize_speech()
+            wiki = wikipedia.wikipediaDefine(request_topic)
+            defineTextList = wiki.split("."
+                                        "")
+            # loop through input:lines, or fewer lines in the return if there are fewer than input:lines lines in it
+            for i in range(0, min(len(defineTextList) + 1, 6)):
+                print("line: " + str(i))
+                tts.speak(defineTextList[i])
+
+        elif "time" in query:
+            tts.speak(gptChat.chat_with_gpt(f"Could you please tell me that the time is {str(datetime.datetime.now().strftime("%H:%M"))}, though say it differently?"))
+
         # Calendar and Todo list management
         elif "calendar" in query or "to-do" in query:
             todo = Todo()
             response = todo.manage_calendar_and_todo(query)
             tts.speak(response)
 
+        elif "thank you" in query or "thanks" in query:
+            tts.speak(gptChat.chat_with_gpt(query))
 
+        # Interactive conversation
+        elif "chat" in query or "talk" in query:
+            tts.speak(gptChat.chat_with_gpt(query))
+            while True:
+                user_input = speechRecog.recognize_speech()
+                if user_input is not None and (
+                        "exit" in user_input.lower() or "quit" in user_input.lower() or "stop" in user_input.lower()):
+                    tts.speak(gptChat.chat_with_gpt("Goodbye!"))
+                    break
+
+                if user_input:
+                    response = gptChat.chat_with_gpt(user_input)
+                    tts.speak(response)
 
         # Fallback for unclear commands
         else:
-            tts.speak(gptChat.chat_with_gpt("You didn't quite understand the last thing I said, could you ask me to repeat it?"))
+            tts.speak(gptChat.chat_with_gpt("Respond as if you didn't quite understand the last thing I said, it's not a command you understand."))
 
 
 if __name__ == "__main__":

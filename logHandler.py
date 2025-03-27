@@ -14,9 +14,9 @@ class Logger:
 
     def log(self, text):
         textToLog = f"<log>{datetime.datetime.now()}<{self.caller}> {text}\n" # assemble text to log
-        logFile = open(self.logFile, "a")                                   # open file in append mode
-        logFile.write(textToLog)                                            # write to file
-        logFile.close()                                                     # close file
+        #logFile = open(self.logFile, "a")                                   # open file in append mode
+        #logFile.write(textToLog)                                            # write to file
+        #logFile.close()                                                     # close file
         if self.terminalOutput: print(textToLog[:-1])                            # if the class is initialized w/ terminalOutput=true, print to stdout
 
 
