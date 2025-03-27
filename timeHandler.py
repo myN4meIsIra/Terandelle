@@ -5,7 +5,7 @@ functionality for pulling time and date
 
 import datetime
 
-class Time:
+class TimeClass:
     def __init__(self):
         pass
 
@@ -22,8 +22,7 @@ class Time:
 
 
     def getDateTimeFormatted(self):
-        dateTimeData = self.getDateTime()
-
+        dateTimeData = datetime.datetime.now()
         formattedTImeData = datetime.datetime.strftime(dateTimeData, "%I:%M %p, %A, %B %d, %Y")
 
         return formattedTImeData

@@ -72,7 +72,6 @@ def main():
         elif "calendar" in query or "to-do" in query:
             todo = Todo()
             response = todo.manage_calendar_and_todo(query)
-            tts.speak(response)
 
         elif "thank you" in query or "thanks" in query:
             tts.speak(gptChat.chat_with_gpt(query))

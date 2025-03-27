@@ -31,6 +31,7 @@ class GPTChat:
                 temperature=0.9,
             )
             answer = completion.choices[0].message.content
+            log.log(f"gpt answer: {answer}")
             return answer
 
         except Exception as e:
